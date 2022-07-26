@@ -20,7 +20,7 @@ class MemberRepositoryV0Test {
     @Test
     void crud() throws SQLException {
         // given
-        String memberId = "memberV100";
+        String memberId = "memberV0";
 
         // save
         Member member = new Member(memberId, 10_000);
