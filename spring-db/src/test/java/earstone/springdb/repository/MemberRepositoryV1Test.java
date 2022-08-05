@@ -1,10 +1,12 @@
 package earstone.springdb.repository;
 
+import com.zaxxer.hikari.HikariDataSource;
 import earstone.springdb.domain.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.jdbc.metadata.CommonsDbcp2DataSourcePoolMetadata;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import java.sql.SQLException;
@@ -21,7 +23,11 @@ class MemberRepositoryV1Test {
 
     @BeforeEach
     void beforeEach() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD);
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD);
+        HikariDataSource dataSource = new HikariDataSource();
+        dataSource.setJdbcUrl(URL);
+        dataSource.setUsername(USERNAME);
+        dataSource.setPassword(PASSWORD);
         repository = new MemberRepositoryV1(dataSource);
     }
 
