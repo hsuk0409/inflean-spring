@@ -9,6 +9,9 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.NoSuchElementException;
 
+/**
+ * 트랜잭션 파라미터로 넘기면서 동기화
+ */
 @Slf4j
 @RequiredArgsConstructor
 public class MemberRepositoryV2 {
