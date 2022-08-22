@@ -25,9 +25,9 @@ public class FieldLogTrace implements LogTrace{
     }
 
     private void syncTraceId() {
-        if (traceIdHolder == null) {
+        if (traceIdHolder == null) { // 최초 호출일 시 traceId 새로 생성
             traceIdHolder = new TraceId();
-        } else {
+        } else { // 직전 로그 있을 경우 레벨 증가시켜 동기화
             traceIdHolder = traceIdHolder.createNextId();
         }
     }
@@ -61,8 +61,8 @@ public class FieldLogTrace implements LogTrace{
     }
 
     private void releaseTraceId() {
-        if (traceIdHolder.isFirstLevel()) {
-            traceIdHolder = null; // 메모리 삭제
+        if (traceIdHolder.isFirstLevel()) { // 첫번째 레벨이면 초기화
+            traceIdHolder = null;
         } else {
             traceIdHolder = traceIdHolder.createPreviousId(); // 끝날 때 위에서 아래로 가꾸로 내려온다.
         }
