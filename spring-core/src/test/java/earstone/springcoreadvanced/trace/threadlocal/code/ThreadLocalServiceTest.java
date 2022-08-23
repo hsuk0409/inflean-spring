@@ -1,21 +1,20 @@
-package earstone.springcoreadvanced.trace.threadlocal;
+package earstone.springcoreadvanced.trace.threadlocal.code;
 
-import earstone.springcoreadvanced.trace.threadlocal.code.FieldService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @Slf4j
-public class FieldServiceTest {
+public class ThreadLocalServiceTest {
 
-    private FieldService fieldService = new FieldService();
+    private ThreadLocalService threadLocalService = new ThreadLocalService();
 
     @DisplayName("간단히 동시성 문제가 없는 쓰레드 두개를 생성한다.")
     @Test
     void field() {
         log.info("main start");
-        Runnable userA = () -> fieldService.logic("userA");
-        Runnable userB = () -> fieldService.logic("userB");
+        Runnable userA = () -> threadLocalService.logic("userA");
+        Runnable userB = () -> threadLocalService.logic("userB");
 
         Thread threadA = new Thread(userA);
         threadA.setName("thread-A");
