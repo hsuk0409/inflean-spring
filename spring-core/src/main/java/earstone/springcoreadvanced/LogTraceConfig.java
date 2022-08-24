@@ -1,6 +1,7 @@
 package earstone.springcoreadvanced;
 
-import earstone.springcoreadvanced.trace.logtrace.FieldLogTrace;
+import earstone.springcoreadvanced.trace.logtrace.LogTrace;
+import earstone.springcoreadvanced.trace.logtrace.ThreadLocalLogTrace;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 public class LogTraceConfig {
 
     @Bean
-    public FieldLogTrace logTrace() {
-        return new FieldLogTrace();
+    public LogTrace logTrace() {
+        return new ThreadLocalLogTrace();
     }
 
 }
