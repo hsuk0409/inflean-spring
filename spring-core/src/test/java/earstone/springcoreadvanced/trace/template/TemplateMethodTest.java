@@ -1,5 +1,7 @@
 package earstone.springcoreadvanced.trace.template;
 
+import earstone.springcoreadvanced.trace.template.code.SubClassLogic1;
+import earstone.springcoreadvanced.trace.template.code.SubClassLogic2;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,13 +17,11 @@ public class TemplateMethodTest {
     }
 
     private void logic1() {
-        // 1. 변하하지 않는 것
-        // 2. 변하는 것
-        long startTime = System.currentTimeMillis(); // 1
-        log.info("비지니스 로직1 실행"); // 2
-        long endTime = System.currentTimeMillis(); // 1
-        long resultTime = endTime - startTime; // 1
-        log.info("resultTime=" + resultTime); // 1
+        long startTime = System.currentTimeMillis();
+        log.info("비지니스 로직1 실행");
+        long endTime = System.currentTimeMillis();
+        long resultTime = endTime - startTime;
+        log.info("resultTime=" + resultTime);
     }
 
     private void logic2() {
@@ -30,6 +30,16 @@ public class TemplateMethodTest {
         long endTime = System.currentTimeMillis();
         long resultTime = endTime - startTime;
         log.info("resultTime=" + resultTime);
+    }
+
+    @DisplayName("템플릿 메소드를 적용하여 비지니스 로직을 실행한다.")
+    @Test
+    void templateMethodV1() {
+        SubClassLogic1 template1 = new SubClassLogic1();
+        template1.execute();
+
+        SubClassLogic2 template2 = new SubClassLogic2();
+        template2.execute();
     }
 
 }
