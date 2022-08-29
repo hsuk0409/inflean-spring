@@ -4,20 +4,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 전략을 필드에서 주입받는 방식
+ * 전략을 파라미터로 주입받는 방식
  */
 @Slf4j
 @RequiredArgsConstructor
-public class ContextV1 {
+public class ContextV2 {
 
-    /**
-     * 핵심은 Strategy 인터페이스에 의존하는 것이다.
-     * "선 조립 후 실행"
-     * 스프링의 원리 --> 애플리케이션 실행 시점에 빈들을 미리 생성해놓는 것
-     */
-    private final Strategy strategy;
-
-    public void execute() {
+    public void execute(Strategy strategy) {
         long startTime = System.currentTimeMillis();
         strategy.call(); // 위임
         long endTime = System.currentTimeMillis();
