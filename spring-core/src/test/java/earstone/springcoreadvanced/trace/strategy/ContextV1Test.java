@@ -1,6 +1,7 @@
 package earstone.springcoreadvanced.trace.strategy;
 
 import earstone.springcoreadvanced.trace.strategy.code.strategy.ContextV1;
+import earstone.springcoreadvanced.trace.strategy.code.strategy.Strategy;
 import earstone.springcoreadvanced.trace.strategy.code.strategy.StrategyLogic1;
 import earstone.springcoreadvanced.trace.strategy.code.strategy.StrategyLogic2;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +43,28 @@ public class ContextV1Test {
 
         StrategyLogic2 strategyLogic2 = new StrategyLogic2();
         ContextV1 contextV2 = new ContextV1(strategyLogic2);
+        contextV2.execute();
+    }
+
+    @DisplayName("익명 내부클래스를 사용해 전략퍄턴 로직을 실행한다.")
+    @Test
+    void strategyV2() {
+        Strategy strategyLogic1 = () -> log.info("비지니스 로직1 실행");
+        ContextV1 contextV1 = new ContextV1(strategyLogic1);
+        contextV1.execute();
+
+        Strategy strategyLogic2 = () -> log.info("비지니스 로직2 실행");
+        ContextV1 contextV2 = new ContextV1(strategyLogic2);
+        contextV2.execute();
+    }
+
+    @DisplayName("익명 내부클래스를 사용해 전략퍄턴 로직을 실행한다. (리팩토링)")
+    @Test
+    void strategyV3() {
+        ContextV1 contextV1 = new ContextV1(() -> log.info("비지니스 로직1 실행"));
+        contextV1.execute();
+
+        ContextV1 contextV2 = new ContextV1(() -> log.info("비지니스 로직2 실행"));
         contextV2.execute();
     }
 
