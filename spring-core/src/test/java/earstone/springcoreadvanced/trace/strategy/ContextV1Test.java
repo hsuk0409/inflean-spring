@@ -48,7 +48,29 @@ public class ContextV1Test {
 
     @DisplayName("익명 내부클래스를 사용해 전략퍄턴 로직을 실행한다.")
     @Test
-    void strategyV2() {
+    void strategyV2_1() {
+        Strategy strategyLogic1 = new StrategyLogic1() {
+            @Override
+            public void call() {
+                log.info("비지니스 로직1 실행");
+            }
+        };
+        ContextV1 contextV1 = new ContextV1(strategyLogic1);
+        contextV1.execute();
+
+        Strategy strategyLogic2 = new StrategyLogic1() {
+            @Override
+            public void call() {
+                log.info("비지니스 로직2 실행");
+            }
+        };
+        ContextV1 contextV2 = new ContextV1(strategyLogic2);
+        contextV2.execute();
+    }
+
+    @DisplayName("익명 내부클래스를 사용해 전략퍄턴 로직을 실행한다. (람다 함수 사용)")
+    @Test
+    void strategyV2_2() {
         Strategy strategyLogic1 = () -> log.info("비지니스 로직1 실행");
         ContextV1 contextV1 = new ContextV1(strategyLogic1);
         contextV1.execute();
@@ -60,7 +82,7 @@ public class ContextV1Test {
 
     @DisplayName("익명 내부클래스를 사용해 전략퍄턴 로직을 실행한다. (리팩토링)")
     @Test
-    void strategyV3() {
+    void strategyV2_3() {
         ContextV1 contextV1 = new ContextV1(() -> log.info("비지니스 로직1 실행"));
         contextV1.execute();
 
